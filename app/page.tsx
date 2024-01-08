@@ -73,7 +73,7 @@ export default function Home() {
             }
           }}
         />
-        {searchTerm && (
+        {searchTerm ? (
           <button
             onClick={handleClear}
             className="bg-gray-300 text-gray-700 px-4 py-2"
@@ -91,9 +91,9 @@ export default function Home() {
               <path d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
-        )}
+        ) : null}
       </div>
-        {searchTerm && books.length && (
+        {searchTerm && books.length ? (
       <div className="my-1">
           <button
             onClick={handleToggleSort}
@@ -102,21 +102,21 @@ export default function Home() {
             {sortAsc ? "Sort Ascending By Publish Year" : "Sort Descending By Publish Year"}
           </button>
       </div>
-        )}
+        ) : null}
       <div>
         <h1 className="text-3xl font-bold mt-8 mb-4">Book Information</h1>
         {/* Showing loader while loading books */}
-        {loading && (
+        {loading ? (
           <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-            <p className="text-white animate-pulse">Loading books...</p>
+            <p className="text-white animate-pulse text-xl">Loading books...</p>
           </div>
-        )}
+        ) : null}
         {/* Showing no book found information */}
-        {!searchTerm && !books.length && !loading && (
+        {(!searchTerm || !books.length) ? (
           <div className="">
             <p className="">Enter a search term to find books.</p>
           </div>
-        )}
+        ) : null}
         {books.length ? <BookTable books={books} /> : null}
       </div>
     </main>
